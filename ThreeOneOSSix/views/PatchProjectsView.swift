@@ -342,6 +342,7 @@ struct PatchProjectsView: View {
         .padding(.vertical, 64)
     }
 
+}
 
 private struct WallpaperImportFeedback: Identifiable {
     let id = UUID()
