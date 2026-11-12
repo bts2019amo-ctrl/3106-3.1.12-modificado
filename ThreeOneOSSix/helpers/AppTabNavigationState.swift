@@ -44,8 +44,8 @@ extension AppSection {
 enum TabBarSelection {
     static let storageKey = "tabbar.selection"
     static let maxSections = 5
-    /// sources(2), installed(3), search(5), wallpapers(7)
-    static let defaultRaw = "2,3,5,7"
+    /// Only Installed remains visible in the app navigation.
+    static let defaultRaw = "3"
     static let legacyDefaultRaw = "0,1,2,3,4"
 
     static func sections(from raw: String) -> [AppSection] {
@@ -105,11 +105,8 @@ struct FeatureVisibility: Equatable {
 
     var visibleSections: [AppSection] {
         selectedSections.filter { section in
-            // These sections are intentionally hidden from the app navigation.
-            if [.home, .new, .files, .cleaner].contains(section) { return false }
-            if section == .wallpapers && !wallpapersSupported { return false }
-            if section == .files && !developerModeEnabled { return false }
-            return true
+            // Installed is the only section intentionally exposed in the app navigation.
+            section == .installed
         }
     }
 
