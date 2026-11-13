@@ -44,14 +44,20 @@ struct ContentView: View {
     }
 
     var body: some View {
-        Group {
-            if horizontalSizeClass == .regular {
-                regularLayout
-            } else {
-                compactLayout
+        ZStack {
+            Color.black.ignoresSafeArea()
+            ParticleFieldBackground()
+
+            Group {
+                if horizontalSizeClass == .regular {
+                    regularLayout
+                } else {
+                    compactLayout
+                }
             }
         }
         .tint(AppTheme.accent)
+        .preferredColorScheme(.dark)
         .imageScale(.small)
         .onChange(of: patchDraftCoordinator.request?.id) { requestID in
             if requestID != nil { tabNavigation.select(AppSection.installed.rawValue) }

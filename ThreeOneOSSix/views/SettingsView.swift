@@ -61,6 +61,8 @@ struct SettingsView: View {
                 }
 
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.clear)
             .tint(AppTheme.accent)
             .navigationTitle(language.text("settings.title"))
             .navigationBarTitleDisplayMode(.inline)

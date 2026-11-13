@@ -26,7 +26,7 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
-            AppTheme.pageBackground
+            Color.black
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
