@@ -49,8 +49,12 @@ struct PatchProjectsView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
+        ZStack {
+            Color.black.ignoresSafeArea()
+            ParticleFieldBackground()
+
+            NavigationStack {
+                VStack(spacing: 0) {
                 List {
                     if !hasLocalContent && (store.isBusy || isImportingWallpapers) {
                         loadingState
@@ -97,12 +101,13 @@ struct PatchProjectsView: View {
                             }
                         }
                     }
+                    }
+                    .listStyle(.insetGrouped)
+                    .scrollContentBackground(.hidden)
+                    .background(Color.clear)
                 }
-                .listStyle(.insetGrouped)
-                .scrollContentBackground(.hidden)
                 .background(Color.clear)
-            }
-            .navigationTitle(language.text("tab.installed"))
+                .navigationTitle(language.text("tab.installed"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 AppUtilityToolbar(
@@ -199,8 +204,9 @@ struct PatchProjectsView: View {
                     )
                 }
             }
-            .onChange(of: draftCoordinator.importRequest?.id) { _ in
-                consumeExternalImport()
+                .onChange(of: draftCoordinator.importRequest?.id) { _ in
+                    consumeExternalImport()
+                }
             }
         }
     }
